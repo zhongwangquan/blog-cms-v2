@@ -5,6 +5,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 
 interface Props {
   handleToggleChange: Function
+  children?: React.ReactNode
 }
 
 // 24 hours, 12 hours, 1 hour

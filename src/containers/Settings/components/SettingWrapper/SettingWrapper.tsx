@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const SettingWrapper: FC = ({ children }) => {
+const SettingWrapper: FC<{ children?: React.ReactNode }> = ({ children }) => {
   const classes = useStyles()
 
   return <section className={classes.settingWrapper}>{children}</section>

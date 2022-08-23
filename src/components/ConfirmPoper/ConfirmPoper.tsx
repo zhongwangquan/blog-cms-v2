@@ -15,6 +15,7 @@ import {
 interface Props {
   title?: string
   onOk: () => void
+  children: any
 }
 
 const ConfirmPoper: FC<Props> = ({ children, onOk, title }) => {

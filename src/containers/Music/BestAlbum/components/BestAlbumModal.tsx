@@ -153,7 +153,7 @@ const BestAlbumModal: FC<Props> = ({
             label="Release Date"
             value={values.releaseDate}
             error={!!errors.releaseDate}
-            helperText={errors.releaseDate}
+            helperText={<div>errors.releaseDate</div>}
             showTodayButton={true}
             ampm={false}
             onChange={(date) => setFieldValue('releaseDate', date, true)}

@@ -8,10 +8,6 @@ import {
   DialogContentText,
 } from '@material-ui/core'
 
-interface IConfirmModal {
-  onSubmit: (ids: string[]) => void
-}
-
 const ConfirmModal: FC<any> = ({ routeState, onSubmit, goBack }) => (
   <Dialog open onClose={goBack}>
     <DialogTitle>Are you sure delete those items?</DialogTitle>

@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Props {
   tableName: string
   icon: string
+  children: any
 }
 
 const TableWrapper: FC<Props> = ({ children, tableName, icon }) => {

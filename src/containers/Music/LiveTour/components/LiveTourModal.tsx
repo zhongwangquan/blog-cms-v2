@@ -119,7 +119,7 @@ const LiveTourModal: FC<Props> = ({
             required
             value={values.showTime}
             error={!!errors.showTime}
-            helperText={errors.showTime}
+            helperText={<div>errors.showTime</div>}
             showTodayButton={true}
             ampm={false}
             onChange={(date) => setFieldValue('showTime', date, true)}

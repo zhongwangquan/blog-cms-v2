@@ -8,10 +8,10 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
-import 'tui-editor/dist/tui-editor.min.css'
-import 'tui-editor/dist/tui-editor-contents.min.css'
+import '@toast-ui/editor/dist/toastui-editor.css'
+// import '@toast-ui/editor/dist/tui-editor/editor-contents.min.css'
 import 'codemirror/lib/codemirror.css'
-import 'tui-chart/dist/tui-chart.css'
+// import 'tui-chart/dist/tui-chart.css'
 import 'tui-color-picker/dist/tui-color-picker.css'
 import { Editor } from '@toast-ui/react-editor'
 import umlPlugin from '@toast-ui/editor-plugin-uml'
@@ -349,7 +349,7 @@ const PostEditor: FC = () => {
 
           <ChipInput
             error={!!errors.tags}
-            helperText={errors.tags}
+            helperText={<div>errors.tags</div>}
             label="Tags"
             defaultValue={values.tags}
             fullWidth

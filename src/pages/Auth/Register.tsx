@@ -51,13 +51,12 @@ const Register: FC = () => {
 
   // TODO: support register.
   useEffect(() => {
-    enqueueSnackbar('暂不开放注册, 敬请谅解!', {
-      variant: 'error',
-    })
-
-    setTimeout(() => {
-      history.push('/login')
-    }, 500)
+    // enqueueSnackbar('暂不开放注册, 敬请谅解!', {
+    //   variant: 'error',
+    // })
+    // setTimeout(() => {
+    //   history.push('/login')
+    // }, 500)
   }, [enqueueSnackbar, history])
 
   return (
