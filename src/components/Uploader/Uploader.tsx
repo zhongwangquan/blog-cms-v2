@@ -32,11 +32,12 @@ const Uploader: FC<Props> = ({
 
       axios({
         method: 'post',
-        url: `${process.env.REACT_APP_UPLOADER_SERVICE_DOMAIN}/uploadSingleFile`,
+        url: `${process.env.REACT_APP_UPLOADER_SERVICE_DOMAIN}/upload`,
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       })
         .then((res) => {
+          console.log('upload-res', res)
           setCurrFile(res.data)
           onChange(res.data)
 

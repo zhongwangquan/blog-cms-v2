@@ -1,8 +1,9 @@
-import { FC, useState } from 'react'
+import { FC, useState, useRef } from 'react'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'
 import { CircularProgress } from '@material-ui/core'
+import ReCAPTCHA from 'react-google-recaptcha'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
@@ -11,12 +12,14 @@ import { useScriptUrl } from 'src/hooks/useScript'
 import { LOGIN } from './typeDefs'
 import { getBackgroundUrl } from './utils'
 import styles from './Auth.module.scss'
+import axios from 'axios'
 
 const Login: FC = () => {
   const history = useHistory()
   const [isRecaptchaLoading, setIsRecaptchaLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
-  useScriptUrl(GOOGLE_RECAPTCHA_URL)
+  const captchaRef = useRef(null)
+  // useScriptUrl(GOOGLE_RECAPTCHA_URL)
 
   const toRegister = () => {
     history.push('/register')
@@ -49,37 +52,43 @@ const Login: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      if (window.grecaptcha) {
-        window.grecaptcha.ready(async () => {
-          try {
-            setIsRecaptchaLoading(true)
-            const token = await window.grecaptcha.execute(
-              process.env.REACT_APP_RECAPTCHA_KEY,
-              { action: 'submit' },
-            )
-
-            login({
-              variables: { input: { ...values, token } },
-            })
-          } catch (e) {
-            enqueueSnackbar(
-              'Google reCAPTCHA is not effective. Please refresh the page.',
-              {
-                variant: 'error',
-              },
-            )
-          } finally {
-            setIsRecaptchaLoading(false)
-          }
+      try {
+        setIsRecaptchaLoading(true)
+        // const token = await captchaRef.current.getValue()
+        // console.log('cap-token', token)
+        await login({
+          variables: { input: { ...values } },
         })
-      } else {
+        // axios
+        //   .post(
+        //     `https://www.google.com/recaptcha/api/siteverify?secret=${token}`,
+        //   )
+        //   .then((res) => {
+        //     console.log('clien-res', res)
+        //     return res.data
+        //   })
+        // captchaRef.current.reset()
+      } catch (e) {
         enqueueSnackbar(
-          'Please make sure your network environment supports Google reCAPTCHA',
+          'Google reCAPTCHA is not effective. Please refresh the page.',
           {
             variant: 'error',
           },
         )
+      } finally {
+        setIsRecaptchaLoading(false)
       }
+      // if (window.grecaptcha) {
+      //   window.grecaptcha.ready(async () => {
+      //   })
+      // } else {
+      //   enqueueSnackbar(
+      //     'Please make sure your network environment supports Google reCAPTCHA',
+      //     {
+      //       variant: 'error',
+      //     },
+      //   )
+      // }
     },
   })
 
@@ -133,6 +142,11 @@ const Login: FC = () => {
         </label>
 
         <p className={styles.link}>Forgot your password?</p>
+
+        <ReCAPTCHA
+          sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+          ref={captchaRef}
+        />
 
         <button
           className={styles.submitBtn}

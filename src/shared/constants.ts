@@ -6,7 +6,7 @@ export const SNACKBAR_ANCHOR_ORIGIN: SnackbarOrigin = {
   horizontal: 'center',
 }
 
-export const GOOGLE_RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_KEY}`
+export const GOOGLE_RECAPTCHA_URL = `https://www.google.com/recaptcha/api.js`
 
 export const SNACKBAR_MAX_NUM = 1
 
